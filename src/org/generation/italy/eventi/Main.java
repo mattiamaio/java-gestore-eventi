@@ -53,7 +53,7 @@ public class Main {
 			System.out.println("I biglietti prenotati sono: " + event.getReservedPlaces());
 			System.out.println("I biglietti rimasti sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
 
-			System.out.print("\nScrivere s per disdire o continuare senza disdire: ");
+			System.out.print("\nScrivere s per disdire o n per continuare senza disdire: ");
 			scan.nextLine();
 			choice = scan.nextLine();
 			do {
@@ -74,7 +74,7 @@ public class Main {
 			} while (follow == false);
 
 			System.out.println("I biglietti prenotati sono: " + event.getReservedPlaces());
-			System.out.println("I biglietti totali sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
+			System.out.println("I biglietti rimasti sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
 
 		} catch (Exception e) {
 			System.out.println("Il programma è terminato perché: " + e.getMessage());
