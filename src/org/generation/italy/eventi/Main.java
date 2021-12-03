@@ -29,7 +29,6 @@ public class Main {
 		try {
 
 			Evento event = new Evento(title, date, totalPlaces);
-			// System.out.println(event.toString());
 			System.out.print("\nScrivere s per prenotare o n per proseguire senza prenotare: ");
 			scan.nextLine();
 			String choice = scan.nextLine().toLowerCase();
@@ -37,7 +36,7 @@ public class Main {
 			do {
 				if (choice.equals("s")) {
 					follow = true;
-					System.out.print("inserire numero prenotazioni da effettuare: ");
+					System.out.print("Inserire numero prenotazioni da effettuare: ");
 					int resNum = scan.nextInt();
 					for (int i = 1; i <= resNum; i++) {
 						event.prenota();
@@ -51,8 +50,8 @@ public class Main {
 
 			} while (follow == false);
 
-			System.out.println(event.getReservedPlaces());
-			System.out.println(event.getTotalPlaces() - event.getReservedPlaces());
+			System.out.println("I biglietti prenotati sono: " + event.getReservedPlaces());
+			System.out.println("I biglietti rimasti sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
 
 			System.out.print("\nScrivere s per disdire o continuare senza disdire: ");
 			scan.nextLine();
@@ -60,7 +59,7 @@ public class Main {
 			do {
 				if (choice.equals("s")) {
 					follow = true;
-					System.out.print("inserire numero prenotazioni da disdire: ");
+					System.out.print("Inserire numero prenotazioni da disdire: ");
 					int resNum = scan.nextInt();
 					for (int i = 1; i <= resNum; i++) {
 						event.disdici();
@@ -74,13 +73,13 @@ public class Main {
 
 			} while (follow == false);
 
-			System.out.println(event.getReservedPlaces());
-			System.out.println(event.getTotalPlaces() - event.getReservedPlaces());
+			System.out.println("I biglietti prenotati sono: " + event.getReservedPlaces());
+			System.out.println("I biglietti totali sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
 
 		} catch (Exception e) {
 			System.out.println("Il programma è terminato perché: " + e.getMessage());
 		}
-		
+
 		System.out.println("Grazie per aver prenotato!");
 
 		scan.close();
