@@ -20,12 +20,12 @@ public class Evento {
 		if (isValidDate(date)) {
 			this.date = date;
 		} else {
-			throw new Exception("La data dell'evento è passata");
+			throw new Exception("la data dell'evento è passata.");
 		}
 		if (isValidTotalPlaces(totalPlaces)) {
 			this.totalPlaces = totalPlaces;
 		} else {
-			throw new Exception("I posti disponibili devono essere più di 0");
+			throw new Exception("i posti disponibili devono essere più di 0.");
 		}
 
 	}
@@ -68,9 +68,9 @@ public class Evento {
 
 	public void prenota() throws Exception {
 		if (reservedPlaces > totalPlaces) {
-			throw new Exception("L'evento è sold-out");
+			throw new Exception("l'evento è sold-out.");
 		} else if (!isValidDate(date)) {
-			throw new Exception("La data dell'evento è passata");
+			throw new Exception("la data dell'evento è passata.");
 		} else {
 			reservedPlaces++;
 		}
@@ -78,9 +78,9 @@ public class Evento {
 
 	public void disdici() throws Exception {
 		if (reservedPlaces == 0) {
-			throw new Exception("Non ci sono prenotazioni");
+			throw new Exception("non ci sono prenotazioni o prenotazioni sono meno delle richieste di disdetta.");
 		} else if (!isValidDate(date)) {
-			throw new Exception("La data dell'evento è passata");
+			throw new Exception("la data dell'evento è passata.");
 		} else {
 			reservedPlaces--;
 		}

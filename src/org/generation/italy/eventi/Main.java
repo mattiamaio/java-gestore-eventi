@@ -8,22 +8,66 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 
-		Boolean follow = null;
-
 		String title;
 		int totalPlaces;
 		LocalDate date;
 
-		System.out.print("Inserire nome dell'evento: ");
-		title = scan.nextLine();
-		System.out.print("Inserire posti disponibili: ");
-		totalPlaces = scan.nextInt();
-		System.out.print("Inserire giorno evento (DD): ");
-		int day = scan.nextInt();
-		System.out.print("Inserire mese evento (MM): ");
-		int month = scan.nextInt();
-		System.out.print("Inserire anno evento (AAAA): ");
-		int year = scan.nextInt();
+		boolean follow = false;
+		boolean validity = false;
+
+		do {
+			System.out.print("Inserire nome dell'evento: ");
+			title = scan.nextLine();
+			if (title == null || title.length() == 0) {
+				System.out.println("L'evento deve avere un titolo");
+			} else {
+				validity = true;
+			}
+		} while (validity == false);
+		validity = false;
+		do {
+			System.out.print("Inserire posti disponibili: ");
+			totalPlaces = scan.nextInt();
+			if (totalPlaces <= 0) {
+				System.out.println("Ci deve essere almeno una prenotazione.");
+			} else {
+				validity = true;
+			}
+		} while (validity == false);
+		validity = false;
+		int day;
+		do {
+			System.out.print("Inserire giorno evento (DD): ");
+			day = scan.nextInt();
+			if (day > 31 || day <= 0) {
+				System.out.println("Giorno deve essere compreso tra 1 e 31.");
+			} else {
+				validity = true;
+			}
+		} while (validity == false);
+		validity = false;
+		int month;
+		do {
+			System.out.print("Inserire mese evento (MM): ");
+			month = scan.nextInt();
+			if (month > 12 || month <= 0) {
+				System.out.println("Mese deve essere compreso tra 1 e 12.");
+			} else {
+				validity = true;
+			}
+		} while (validity == false);
+		validity = false;
+		int year;
+		do {
+			System.out.print("Inserire anno evento (AAAA): ");
+			year = scan.nextInt();
+			if (year < 2021) {
+				System.out.println("Anno non può essere precedente all'anno corrente.");
+			} else {
+				validity = true;
+			}
+		} while (validity == false);
+		validity = false;
 		date = LocalDate.of(year, month, day);
 
 		try {
@@ -36,20 +80,30 @@ public class Main {
 			do {
 				if (choice.equals("s")) {
 					follow = true;
-					System.out.print("Inserire numero prenotazioni da effettuare: ");
-					int resNum = scan.nextInt();
+					int resNum;
+					do {
+						System.out.print("Inserire numero prenotazioni da effettuare: ");
+						resNum = scan.nextInt();
+						if (resNum <= 0 || resNum > totalPlaces) {
+							System.out.println("Inserire un valore compreso tra 1 e " + totalPlaces + ".");
+						} else {
+							validity = true;
+						}
+
+					} while (validity == false);
+					validity = false;
 					for (int i = 1; i <= resNum; i++) {
 						event.prenota();
 					}
 
 				} else if (choice.equals("n")) {
-					System.out.println("Grazie ed arrivederci.");
+					follow = true;
 				} else {
 					System.out.println("Inserire un valore valido (s/n): ");
 				}
 
 			} while (follow == false);
-
+			follow = false;
 			System.out.println("I biglietti prenotati sono: " + event.getReservedPlaces());
 			System.out.println("I biglietti rimasti sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
 
@@ -59,14 +113,22 @@ public class Main {
 			do {
 				if (choice.equals("s")) {
 					follow = true;
-					System.out.print("Inserire numero prenotazioni da disdire: ");
-					int resNum = scan.nextInt();
+					int resNum;
+					do {
+						System.out.print("\nInserire numero prenotazioni da disdire: ");
+						resNum = scan.nextInt();
+						if (resNum > totalPlaces) {
+							System.out.print("Le disdette non possono essere di più delle prenotazioni.");
+						} else {
+							validity = true;
+						}
+					} while (validity == false);
 					for (int i = 1; i <= resNum; i++) {
 						event.disdici();
 					}
 
 				} else if (choice.equals("n")) {
-					System.out.println("Grazie ed arrivederci.");
+					follow = true;
 				} else {
 					System.out.println("Inserire un valore valido (s/n): ");
 				}
@@ -77,7 +139,7 @@ public class Main {
 			System.out.println("I biglietti rimasti sono: " + (event.getTotalPlaces() - event.getReservedPlaces()));
 
 		} catch (Exception e) {
-			System.out.println("Il programma è terminato perché: " + e.getMessage());
+			System.out.println("Il programma è terminato perché " + e.getMessage());
 		}
 
 		System.out.println("Grazie per aver prenotato!");
