@@ -53,12 +53,12 @@ public class Main {
 
 			System.out.println(event.getReservedPlaces());
 			System.out.println(event.getTotalPlaces() - event.getReservedPlaces());
-			
+
 			System.out.print("\nScrivere s per disdire o continuare senza disdire: ");
 			scan.nextLine();
-			String choice2 = scan.nextLine();
+			choice = scan.nextLine();
 			do {
-				if (choice2.equals("s")) {
+				if (choice.equals("s")) {
 					follow = true;
 					System.out.print("inserire numero prenotazioni da disdire: ");
 					int resNum = scan.nextInt();
@@ -66,20 +66,22 @@ public class Main {
 						event.disdici();
 					}
 
-				} else if (choice2.equals("n")) {
+				} else if (choice.equals("n")) {
 					System.out.println("Grazie ed arrivederci.");
 				} else {
 					System.out.println("Inserire un valore valido (s/n): ");
 				}
 
 			} while (follow == false);
-			
+
 			System.out.println(event.getReservedPlaces());
 			System.out.println(event.getTotalPlaces() - event.getReservedPlaces());
 
 		} catch (Exception e) {
 			System.out.println("Il programma è terminato perché: " + e.getMessage());
 		}
+		
+		System.out.println("Grazie per aver prenotato!");
 
 		scan.close();
 	}
